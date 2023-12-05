@@ -1,0 +1,10 @@
+{
+	"autoload":{
+		"psr-4":{
+			"gaucho\\":"gaucho/"
+		}
+	},
+	"require": {
+		"catfan/medoo": "^2.1"
+	}
+}
