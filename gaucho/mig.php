@@ -22,7 +22,7 @@ class mig{
 			return true;
 		}else{
 			switch($this->dbType){
-			case 'mysql':
+				case 'mysql':
 				if($columnName=='id'){
 					$sufix='bigint(20) ';
 					$sufix.='UNSIGNED NOT NULL ';
@@ -42,7 +42,8 @@ class mig{
 				$sql.=$tableName.'` ADD `';
 				$sql.=$columnName.'` '.$sufix.'; ';
 				break;
-			case 'sqlite':
+
+				case 'sqlite':
 				if($columnName=='id'){
 					$sufix='INTEGER PRIMARY KEY ';
 					$sufix.='AUTOINCREMENT';
@@ -73,7 +74,7 @@ class mig{
 		$sql='CREATE TABLE IF NOT EXISTS `';
 		$sql.=$tableName.'` ('.PHP_EOL;
 		switch($this->dbType){
-		case 'mysql':
+			case 'mysql':
 			$sql=$sql;
 			$id='bigint(20) UNSIGNED NOT NULL ';
 			$id.='AUTO_INCREMENT,'.PHP_EOL;
@@ -81,7 +82,8 @@ class mig{
 			$text='LONGTEXT NULL';
 			$sufix=' ENGINE=InnoDB;';
 			break;
-		case 'sqlite':
+
+			case 'sqlite':
 			$id='INTEGER PRIMARY KEY AUTOINCREMENT';
 			$text='TEXT';
 			$sufix=';';
@@ -113,11 +115,12 @@ class mig{
 
 	function dropColumn($columnName,$tableName){
 		switch($this->dbType){
-		case 'mysql':
+			case 'mysql':
 			$sql = 'ALTER TABLE `' . $tableName . '` DROP `' . $columnName . '`;';
 			return $this->query($sql);
 			break;
-		case 'sqlite':
+
+			case 'sqlite':
 			// pega as colunas da tabela antiga
 			$columnNames=$this
 			->getTableColumns($tableName);
@@ -131,7 +134,7 @@ class mig{
 			$this->createTable($tmpTableName,$columnNames);
 			$columnNamesInline='`';
 			$columnNamesInline.=implode(
-			'`,`', $columnNames
+				'`,`', $columnNames
 			);
 			$columnNamesInline.='`';
 			$sql='INSERT INTO '.$tmpTableName;
@@ -205,11 +208,12 @@ class mig{
 
 	function getTableColumns($tableName){
 		switch($this->dbType){
-		case 'mysql':
+			case 'mysql':
 			$sql='SHOW COLUMNS FROM `'.$tableName.'`;';
 			$column=0;
 			break;
-		case 'sqlite':
+
+			case 'sqlite':
 			$sql='PRAGMA table_info('.$tableName.');';
 			$column = 1;
 			break;
@@ -223,10 +227,11 @@ class mig{
 
 	function getTableList(){
 		switch($this->dbType){
-		case 'mysql':
+			case 'mysql':
 			$sql='SHOW TABLES;';
 			break;
-		case 'sqlite':
+
+			case 'sqlite':
 			$sql='SELECT name FROM sqlite_master ';
 			$sql.='WHERE type="table" AND name NOT ';
 			$sql.='LIKE "sqlite_%";';
@@ -362,11 +367,12 @@ class mig{
 
 	function renameTable($oldTableName,$newTableName){
 		switch($this->dbType){
-		case 'mysql':
+			case 'mysql':
 			$sql='ALTER TABLE `'.$oldTableName;
 			$sql.='` RENAME `' . $newTableName . '`';
 			break;
-		case 'sqlite':
+			
+			case 'sqlite':
 			$sql='ALTER TABLE `'.$oldTableName;
 			$sql.='` RENAME TO `'.$newTableName.'`';
 			break;
