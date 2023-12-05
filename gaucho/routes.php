@@ -5,7 +5,6 @@ class routes{
 	var $methodRaw;
 	var $routes;
 	function call($namespace){
-		// $namespace=$this->routes[$this->segment(1)];
 		$method=$this->getMethod();
 		// verifica se a classe existe
 		if(class_exists($namespace)){
