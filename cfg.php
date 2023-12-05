@@ -13,7 +13,4 @@ $env->load(__DIR__.'/.env');
 
 // rota
 $routes=new routes();
-
 $routes->load(__DIR__.'/routes.php');
-// print '<pre>';
-// var_export($routes->segment());

@@ -2,9 +2,10 @@
 namespace gaucho;
 
 class routes{
+	var $methodRaw;
 	var $routes;
 	function call($namespace){
-		$namespace=$this->routes[$this->segment(1)];
+		// $namespace=$this->routes[$this->segment(1)];
 		$method=$this->getMethod();
 		// verifica se a classe existe
 		if(class_exists($namespace)){
@@ -24,9 +25,9 @@ class routes{
 			die($msg);
 		}
 	}
-	function getMethod($raw=false){
+	function getMethod($methodRaw=false){
 		$method=$_SERVER['REQUEST_METHOD'];
-		if($raw){
+		if($this->methodRaw or $methodRaw){
 			return $method;
 		}else{
 			if($method=='POST') {
@@ -43,11 +44,24 @@ class routes{
 			die('file '.htmlentities($filename).' not found');
 		}
 		if(is_array($this->routes)){
-			$this->run();
+			if(isset($this->routes[$this->segment(1)])){
+				return $this->call($this->routes[$this->segment(1)]);
+			}elseif(isset($this->routes['*'])){	
+				return $this->call($this->routes['*']);
+			}elseif(isset($this->routes['404'])){	
+				http_response_code(404);			
+				return $this->call($this->routes['404']);
+			}else{
+				http_response_code(404);
+				die('404 not found');
+			}
 		}else{	
 			die('invalid routes.php file');
 		}
 	}
+	function setMethodRaw($methodRaw){
+		$this->methodRaw=$methodRaw;
+	}	
 	function segment($segment=null){
 		// 1) pega os dados do header
 		$host=$_SERVER['HTTP_HOST'];
@@ -97,17 +111,4 @@ class routes{
 			return false;
 		}
 	}	
-	function run(){
-		if(isset($this->routes[$this->segment(1)])){
-			return $this->call($this->routes[$this->segment(1)]);
-		}elseif(isset($this->routes['*'])){	
-			return $this->call($this->routes['*']);
-		}elseif(isset($this->routes['404'])){	
-			http_response_code(404);			
-			return $this->call($this->routes['404']);
-		}else{
-			http_response_code(404);
-			die('404 not found');
-		}
-	}
 }

@@ -1,3 +1,6 @@
 <?php
 require 'cfg.php';
-header('Location: '.$_ENV['SITE_URL']);
+if($routes->segment(1)=='/'){
+	header('Location: '.$_ENV['SITE_URL']);
+	die();
+}
