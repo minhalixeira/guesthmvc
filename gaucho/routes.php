@@ -12,6 +12,7 @@ class routes{
 		}else{
 			die("class ".htmlentities($namespace).' not found');
 		}
+		// verifica se o método existe na classe
 		if(
 			method_exists($obj,$method) or 
 			method_exists($obj,'GET')
