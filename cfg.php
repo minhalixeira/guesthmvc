@@ -6,8 +6,17 @@ require __DIR__.'/vendor/autoload.php';
 
 define('HMVC',__DIR__.'/hmvc');
 
+use Medoo\Medoo;
 use gaucho\env;
 use gaucho\routes;
+
+function isCli(){
+	if(php_sapi_name()=="cli"){
+		return true;
+	}else{
+		return false;
+	}
+}
 
 // env
 $env=new env();
@@ -15,10 +24,9 @@ $env->load(__DIR__.'/.env');
 
 // db
 $db=new Medoo([
-    'type'=>'sqlite',
-    'database'=>'db/db.sqlite3'
+	'type'=>'sqlite',
+	'database'=>__DIR__.'/db/db.sqlite3'
 ]);
 
-// rota
+// routes
 $routes=new routes();
-$routes->load(__DIR__.'/routes.php');
