@@ -13,6 +13,12 @@ use gaucho\routes;
 $env=new env();
 $env->load(__DIR__.'/.env');
 
+// db
+$db=new Medoo([
+    'type'=>'sqlite',
+    'database'=>'db/db.sqlite3'
+]);
+
 // rota
 $routes=new routes();
 $routes->load(__DIR__.'/routes.php');
