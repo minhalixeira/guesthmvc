@@ -5,6 +5,6 @@ use gaucho\mig;
 
 $pdo=$db->pdo;
 $dbType='sqlite';
-$tableDirectory=glob($_ENV['SITE_ROOT'].'/hmvc/*/table');
+$tableDirectory=glob(HMVC.'/*/table');
 $mig=new mig($pdo,$tableDirectory,$dbType);
 $mig->mig();

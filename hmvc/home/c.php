@@ -2,6 +2,8 @@
 namespace hmvc\home;
 class c{
 	function GET(){
-		print 'hello world!';
+		$title='Guest HMVC';
+		require HMVC.'/home/view/head.php';
+		require HMVC.'/home/view/home.php';
 	}
 }
