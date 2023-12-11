@@ -1,14 +1,26 @@
 /* versões
 v0.1.0	1k.css
+v0.2.0	form básico
 */
 
-
-// variáveis
-@corDoTexto:	black;
-@fonteDoTexto:	sans-serif;
-@fonteDoCode:	monospace;
+@import 'vars.less';
+@import '1k.less';
 
 body{
 	color:			@corDoTexto;
 	font-family:	@fonteDoTexto;
+}
+button,label{
+	cursor: pointer;
+}
+form.vertical{
+	text-align: center;
+}
+form.vertical input[type=email],
+form.vertical input[type=text],
+form.vertical label,
+form.vertical textarea{
+	display: block;
+	margin-bottom: 0.25em;
+	width: 100%;
 }

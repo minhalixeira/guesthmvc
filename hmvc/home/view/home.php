@@ -5,7 +5,7 @@
 			<?php 
 			$action=$_ENV['SITE_URL'].'/messages';
 			?>
-			<form action="<?php print $action;?>" method="post">
+			<form action="<?php print $action;?>" class="vertical" method="post">
 				<label for="message">Mensagem:</label>
 				<textarea name="message" id="message"></textarea>
 				<button type="submit">Enviar</button>
