@@ -10,14 +10,6 @@ use Medoo\Medoo;
 use gaucho\env;
 use gaucho\routes;
 
-function isCli(){
-	if(php_sapi_name()=="cli"){
-		return true;
-	}else{
-		return false;
-	}
-}
-
 // env
 $env=new env();
 $env->load(__DIR__.'/.env');
