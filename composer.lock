@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d92e8dddd9bb15eeabddf0335c66a39d",
+    "content-hash": "81d078dced2a71a0c066d72c8ef4719d",
     "packages": [
         {
             "name": "catfan/medoo",
@@ -81,6 +81,57 @@
                 }
             ],
             "time": "2023-06-10T07:54:55+00:00"
+        },
+        {
+            "name": "simplon/mustache",
+            "version": "0.1.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fightbulc/simplon_mustache.git",
+                "reference": "00d95584b4bf8e64e1c3974966dbd13cabc7fe2c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fightbulc/simplon_mustache/zipball/00d95584b4bf8e64e1c3974966dbd13cabc7fe2c",
+                "reference": "00d95584b4bf8e64e1c3974966dbd13cabc7fe2c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Simplon\\Mustache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tino Ehrich",
+                    "email": "tino@bigpun.me",
+                    "role": "developer"
+                }
+            ],
+            "description": "Lightweight & fast implementation of Mustache - Logic-less templates.",
+            "homepage": "https://github.com/fightbulc/simplon_mustache",
+            "keywords": [
+                "fast",
+                "leightweight",
+                "less",
+                "logic",
+                "logic-less",
+                "mustache",
+                "template"
+            ],
+            "support": {
+                "issues": "https://github.com/fightbulc/simplon_mustache/issues",
+                "source": "https://github.com/fightbulc/simplon_mustache/tree/master"
+            },
+            "time": "2015-02-07T21:44:54+00:00"
         }
     ],
     "packages-dev": [],

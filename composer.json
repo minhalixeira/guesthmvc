@@ -6,6 +6,7 @@
 		}
 	},
 	"require": {
-		"catfan/medoo": "^2.1"
+		"catfan/medoo": "^2.1",
+		"simplon/mustache": "^0.1.14"
 	}
 }
