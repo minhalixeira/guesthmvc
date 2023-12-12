@@ -1,15 +1,19 @@
 <?php
 namespace hmvc\messages;
 use gaucho\db;
-class MessagesController extends db{
+class MessagesController{
+	var $db;
+	function __construct(){
+		$dbObj=new db();
+		$this->db=$dbObj->getDb();
+	}
 	function createMessage($message){
-		$db=$this->getDb();
 		$data=[
 			'message'=>$message,
 			'created_at'=>time()
 		];
-		if($db->insert('messages',$data)){
-			return $db->id();
+		if($this->db->insert('messages',$data)){
+			return $this->db->id();
 		}else{
 			return false;
 		}
@@ -30,11 +34,10 @@ class MessagesController extends db{
 		}
 	}
 	function readAll(){
-		$db=$this->getDb();
 		$where=[
 			'ORDER'=>['id'=>'DESC']
 		];
-		return $db->select('messages','*',$where);
+		return $this->db->select('messages','*',$where);
 	}
 	function validMessage($message){
 		$message=trim($message);
