@@ -1,7 +1,5 @@
 <?php
-
 namespace gaucho;
-
 class env{
     public function load($env_filename_str){
         if(!file_exists($env_filename_str)){

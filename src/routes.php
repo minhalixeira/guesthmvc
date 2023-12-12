@@ -1,6 +1,5 @@
 <?php
 namespace gaucho;
-
 class routes{
 	var $methodRaw;
 	var $routes;

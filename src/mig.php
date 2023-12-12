@@ -1,9 +1,7 @@
 <?php
 namespace gaucho;
-
 use \PDO;
 use \PDOException;
-
 class mig{
 	var $conn;
 	var $tableDirectory;

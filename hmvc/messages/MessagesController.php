@@ -1,8 +1,9 @@
 <?php
 namespace hmvc\messages;
-class MessagesController{
+use gaucho\db;
+class MessagesController extends db{
 	function createMessage($message){
-		global $db;		
+		$db=$this->getDb();
 		$data=[
 			'message'=>$message,
 			'created_at'=>time()
@@ -29,7 +30,7 @@ class MessagesController{
 		}
 	}
 	function readAll(){
-		global $db;
+		$db=$this->getDb();
 		$where=[
 			'ORDER'=>['id'=>'DESC']
 		];
