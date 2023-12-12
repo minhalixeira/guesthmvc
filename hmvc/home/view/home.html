@@ -1,8 +1,8 @@
 <div class="container">
 	<div class="row">
 		<div class="col3"></div>
-		<div class="col6 text-center">
-			<h1>{{SITE_NAME}}</h1>
+		<div class="col6">
+			<h1 class="text-center">{{SITE_NAME}}</h1>
 			<form action="{{SITE_URL}}/messages" class="vertical" method="post">
 				<label for="message">Mensagem:</label>
 				<textarea name="message" id="message" maxlength="128" minlength="1" required></textarea>
@@ -11,7 +11,11 @@
 			{{#messages}}
 			{{message}}
 			<br>
-			<small>{{created_at_h}}</small>
+			<small>
+				<a href="{{SITE_URL}}/messages/{{id}}">
+					{{created_at_h}}
+				</a>
+			</small>
 			<hr>
 			{{/messages}}
 		</div>

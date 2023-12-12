@@ -1,11 +1,17 @@
 <?php
 namespace hmvc\messages;
 use gaucho\db;
+use gaucho\routes;
+use gaucho\view;
 class MessagesController{
 	var $db;
+	var $routes;
+	var $view;
 	function __construct(){
+		$this->view=new view();
 		$dbObj=new db();
 		$this->db=$dbObj->getDb();
+		$this->routes=new routes();
 	}
 	function createMessage($message){
 		$data=[
@@ -17,6 +23,16 @@ class MessagesController{
 		}else{
 			return false;
 		}
+	}
+	function GET(){
+		$messageId=$this->routes->segment(2);
+		$messages=$this->readById($messageId);
+		$data=[
+			'title'=>$messages[0]['message'],
+			'messages'=>$messages
+		];
+		$this->view->render('home/head',$data);
+		$this->view->render('messages/messages',$data);		
 	}
 	function POST(){
 		// validar mensagem
@@ -33,10 +49,16 @@ class MessagesController{
 			die('mensagem inválida');
 		}
 	}
-	function readAll(){
+	function readAll($id=false){
 		$where=[
 			'ORDER'=>['id'=>'DESC']
 		];
+		if($id){
+			$where=[
+				'id'=>$id,
+				'LIMIT'=>1
+			];
+		}
 		$arr=$this->db->select('messages','*',$where);
 		if($arr){
 			foreach ($arr as $key => $value) {
@@ -46,6 +68,9 @@ class MessagesController{
 			}
 		}
 		return $arr;
+	}
+	function readById($id){
+		return $this->readAll($id);
 	}
 	function validMessage($message){
 		$message=trim($message);
