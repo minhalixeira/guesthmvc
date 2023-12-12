@@ -37,7 +37,15 @@ class MessagesController{
 		$where=[
 			'ORDER'=>['id'=>'DESC']
 		];
-		return $this->db->select('messages','*',$where);
+		$arr=$this->db->select('messages','*',$where);
+		if($arr){
+			foreach ($arr as $key => $value) {
+				$arr[$key]['created_at_h']=date(
+					"r",$value['created_at']
+				);
+			}
+		}
+		return $arr;
 	}
 	function validMessage($message){
 		$message=trim($message);

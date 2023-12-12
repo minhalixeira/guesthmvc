@@ -7,8 +7,14 @@ class view extends mustache{
 		$this->print=$print;
 	}
 	function render($viewName,$data=[]){
-		$filename=HMVC.'/'.$viewName.'.html';
-		$out=parent::renderFromFile($filename);
+		$data['SITE_URL']=$_ENV['SITE_URL'];
+		$data['SITE_NAME']=$_ENV['SITE_NAME'];
+		$arr=explode('/',$viewName);
+		$hmvc=$arr[0];
+		unset($arr[0]);
+		$viewName=implode('/',$arr);
+		$filename=HMVC.'/'.$hmvc.'/view/'.$viewName.'.html';
+		$out=parent::renderFromFile($filename,$data);
 		if($this->print){
 			print $out;
 		}else{
