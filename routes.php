@@ -1,4 +1,5 @@
 <?php
 return [
-	'/'=>'\hmvc\home\c'
+	'/'=>'\hmvc\home\c',
+	'messages'=>'\hmvc\messages\c'
 ];
