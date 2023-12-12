@@ -6,6 +6,7 @@ install: bin/mig.php less/style.less
 	clear
 	composer install
 	composer dump-autoload
+	sudo chmod -R 777 db
 	$(PHP) bin/mig.php
 	$(LESS) less/style.less public/css/style.css --clean-css
 	$(UGLIFY) js/script.js --output public/js/script.js --compress
