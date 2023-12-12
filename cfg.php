@@ -8,8 +8,6 @@ define('HMVC',__DIR__.'/hmvc');
 
 use Medoo\Medoo;
 use gaucho\env;
-use gaucho\routes;
-
 // env
 $env=new env();
 $env->load(__DIR__.'/.env');
@@ -19,6 +17,3 @@ $db=new Medoo([
 	'type'=>'sqlite',
 	'database'=>__DIR__.'/db/db.sqlite3'
 ]);
-
-// routes
-$routes=new routes();
