@@ -8,7 +8,7 @@
 			?>
 			<form action="<?php print $action;?>" class="vertical" method="post">
 				<label for="message">Mensagem:</label>
-				<textarea name="message" id="message"></textarea>
+				<textarea name="message" id="message" maxlength="128" minlength="1" required></textarea>
 				<button type="submit">Enviar</button>
 			</form>
 		</div>
