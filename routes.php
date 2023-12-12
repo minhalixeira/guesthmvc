@@ -1,5 +1,5 @@
 <?php
 return [
-	'/'=>'\hmvc\home\c',
-	'messages'=>'\hmvc\messages\c'
+	'/'=>'\hmvc\home\HomeController',
+	'messages'=>'\hmvc\messages\MessagesController'
 ];

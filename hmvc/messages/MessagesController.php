@@ -1,6 +1,6 @@
 <?php
 namespace hmvc\messages;
-class c{
+class MessagesController{
 	function createMessage($message){
 		global $db;		
 		$data=[
