@@ -1,7 +1,7 @@
 <?php
 namespace hmvc\messages;
 class c{
-	private function createMessage($message){
+	function createMessage($message){
 		global $db;		
 		$data=[
 			'message'=>$message,
@@ -19,12 +19,23 @@ class c{
 		if($message){
 			// salvar mensagem no banco de dados
 			$messageId=$this->createMessage($message);
-			print $messageId;
+			if($messageId){
+				header('Location: '.$_ENV['SITE_URL']);
+			}else{
+				die("erro ao criar mensagem");
+			}
 		}else{
 			die('mensagem inválida');
 		}
 	}
-	private function validMessage($message){
+	function readAll(){
+		global $db;
+		$where=[
+			'ORDER'=>['id'=>'DESC']
+		];
+		return $db->select('messages','*',$where);
+	}
+	function validMessage($message){
 		$message=trim($message);
 		$len=mb_strlen($message);
 		if($len>=1 AND $len<=128){

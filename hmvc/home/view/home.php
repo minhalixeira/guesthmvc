@@ -11,6 +11,17 @@
 				<textarea name="message" id="message" maxlength="128" minlength="1" required></textarea>
 				<button type="submit">Enviar</button>
 			</form>
+			<?php 
+			if($messages){
+				foreach ($messages as $message) {
+					print nl2br(htmlentities($message['message']));
+					print '<br><small>';
+					print date("r",$message['created_at']);
+					print '</small>';
+					print '<hr>';
+				}
+			}
+			?>
 		</div>
 	</div>
 </div>
