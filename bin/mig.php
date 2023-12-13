@@ -1,11 +1,11 @@
 <?php
 require __DIR__.'/../cfg.php';
 
-use gaucho\db;
+use gaucho\model;
 use gaucho\mig;
 
-$db=new db();
-$db=$db->getDb();
+$model=new model();
+$db=$model->db();
 $pdo=$db->pdo;
 $dbType=$db->info()['driver'];
 $tableDirectory=glob(HMVC.'/*/table');

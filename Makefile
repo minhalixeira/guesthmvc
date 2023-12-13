@@ -2,7 +2,7 @@ LESS=/usr/bin/lessc
 PHP=/usr/bin/php
 UGLIFY=/usr/bin/uglifyjs.terser
 
-install: bin/mig.php less/style.less
+install:
 	clear
 	composer install
 	composer dump-autoload
@@ -10,5 +10,5 @@ install: bin/mig.php less/style.less
 	sudo chmod -R 777 db
 	$(PHP) bin/mig.php
 	$(LESS) less/style.less public/css/style.css --clean-css
-	$(UGLIFY) js/jquery.js js/script.js --output public/js/script.js --compress
+	$(UGLIFY) js/inc/jquery.js js/script.js --output public/js/script.js --compress
 	echo "pronto!"
