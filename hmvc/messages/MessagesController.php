@@ -8,8 +8,8 @@ class MessagesController extends controller{
 		$this->model=new MessagesModel();
 	}
 	function GET(){
-		$messageId=$this->segment(2);
-		$messages=$this->model->readById($messageId);
+		$snow=$this->segment(2);
+		$messages=$this->model->readBySnow($snow);
 		$data=[
 			'title'=>$messages[0]['message'],
 			'messages'=>$messages

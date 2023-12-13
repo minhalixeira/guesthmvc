@@ -1,29 +1,50 @@
 <?php
 namespace hmvc\messages;
 use gaucho\model;
+use gaucho\snow;
 class MessagesModel extends model{
 	function createMessage($message){
+		$unixTime=time();
 		$data=[
 			'message'=>$message,
-			'created_at'=>time()
+			'created_at'=>$unixTime
 		];
 		if($this->db()->insert('messages',$data)){
-			return $this->db()->id();
+			$messageId=$this->db()->id();
+			$snow=new snow();
+			$machineId=1;
+			$sequenceNumber=$this->getSequenceNumber(
+				$messageId
+			);
+			$where=[
+				'id'=>$messageId
+			];
+			$data=[
+				'snow'=>$snow->encode(
+					$unixTime,
+					$machineId,
+					$sequenceNumber
+				)
+			];
+			$this->update($data,$where);
+			return $snow;
 		}else{
 			return false;
 		}
 	}
-	function readAll($id=false){
+	function getSequenceNumber($messageId){
 		$where=[
-			'ORDER'=>['id'=>'DESC']
+			'id[<=]'=>$messageId
 		];
-		if($id){
+		return $this->db()->count('messages',$where);
+	}
+	function readAll($where=false){
+		if(!$where){
 			$where=[
-				'id'=>$id,
-				'LIMIT'=>1
+				'ORDER'=>['id'=>'DESC']
 			];
 		}
-		$cols=['id','message','created_at'];
+		$cols=['message','created_at','snow'];
 		$arr=$this->db()->select('messages',$cols,$where);
 		if($arr){
 			foreach ($arr as $key => $value) {
@@ -34,8 +55,14 @@ class MessagesModel extends model{
 		}
 		return $arr;
 	}
-	function readById($id){
-		return $this->readAll($id);
+	function readBySnow($snow){
+		$where=[
+			'snow'=>$snow
+		];
+		return $this->readAll($snow);
+	}
+	function update($data,$where){
+		return $this->db()->update('messages',$data,$where);
 	}
 	function validMessage($message){
 		$message=trim($message);
