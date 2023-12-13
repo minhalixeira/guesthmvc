@@ -1,17 +1,12 @@
 <?php
 namespace hmvc\messages;
 use gaucho\db;
-use gaucho\routes;
-use gaucho\view;
-class MessagesController{
+use gaucho\controller;
+class MessagesController extends controller{
 	var $db;
-	var $routes;
-	var $view;
 	function __construct(){
-		$this->view=new view();
 		$dbObj=new db();
 		$this->db=$dbObj->getDb();
-		$this->routes=new routes();
 	}
 	function createMessage($message){
 		$data=[
@@ -25,14 +20,14 @@ class MessagesController{
 		}
 	}
 	function GET(){
-		$messageId=$this->routes->segment(2);
+		$messageId=$this->segment(2);
 		$messages=$this->readById($messageId);
 		$data=[
 			'title'=>$messages[0]['message'],
 			'messages'=>$messages
 		];
-		$this->view->render('home/head',$data);
-		$this->view->render('messages/messages',$data);		
+		$this->view('home/head',$data);
+		$this->view('messages/messages',$data);		
 	}
 	function POST(){
 		// validar mensagem
@@ -41,7 +36,7 @@ class MessagesController{
 			// salvar mensagem no banco de dados
 			$messageId=$this->createMessage($message);
 			if($messageId){
-				header('Location: '.$_ENV['SITE_URL']);
+				$this->redirect($_ENV['SITE_URL']);
 			}else{
 				die("erro ao criar mensagem");
 			}
