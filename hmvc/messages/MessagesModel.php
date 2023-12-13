@@ -23,7 +23,8 @@ class MessagesModel extends model{
 				'LIMIT'=>1
 			];
 		}
-		$arr=$this->db()->select('messages','*',$where);
+		$cols=['id','message','created_at'];
+		$arr=$this->db()->select('messages',$cols,$where);
 		if($arr){
 			foreach ($arr as $key => $value) {
 				$arr[$key]['created_at_h']=date(
