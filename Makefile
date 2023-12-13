@@ -10,5 +10,5 @@ install: bin/mig.php less/style.less
 	sudo chmod -R 777 db
 	$(PHP) bin/mig.php
 	$(LESS) less/style.less public/css/style.css --clean-css
-	$(UGLIFY) js/script.js --output public/js/script.js --compress
+	$(UGLIFY) js/jquery.js js/script.js --output public/js/script.js --compress
 	echo "pronto!"
