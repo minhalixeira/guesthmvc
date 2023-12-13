@@ -1,9 +1,9 @@
 <?php
 namespace gaucho;
 use Medoo\Medoo;
-class db{
+class model{
 	var $db;
-	function getDb(){
+	function db(){
 		if(!isset($this->db)){
 			$this->setDb();
 		}

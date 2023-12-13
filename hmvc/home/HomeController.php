@@ -1,14 +1,14 @@
 <?php
 namespace hmvc\home;
-use hmvc\messages\MessagesController;
+use hmvc\messages\MessagesModel;
 use gaucho\view;
 use gaucho\controller;
 class HomeController extends controller{
 	function GET(){
-		$MessagesController=new MessagesController();
+		$MessagesModel=new MessagesModel();
 		$data=[
 			'title'=>'Guest HMVC',
-			'messages'=>$MessagesController->readAll()
+			'messages'=>$MessagesModel->readAll()
 		];
 		$this->view('home/head',$data);
 		$this->view('home/home',$data);

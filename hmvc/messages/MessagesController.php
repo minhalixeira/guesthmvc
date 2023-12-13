@@ -1,27 +1,15 @@
 <?php
 namespace hmvc\messages;
-use gaucho\db;
+use hmvc\messages\MessagesModel;
 use gaucho\controller;
 class MessagesController extends controller{
-	var $db;
+	var $model;
 	function __construct(){
-		$dbObj=new db();
-		$this->db=$dbObj->getDb();
-	}
-	function createMessage($message){
-		$data=[
-			'message'=>$message,
-			'created_at'=>time()
-		];
-		if($this->db->insert('messages',$data)){
-			return $this->db->id();
-		}else{
-			return false;
-		}
+		$this->model=new MessagesModel();
 	}
 	function GET(){
 		$messageId=$this->segment(2);
-		$messages=$this->readById($messageId);
+		$messages=$this->model->readById($messageId);
 		$data=[
 			'title'=>$messages[0]['message'],
 			'messages'=>$messages
@@ -31,10 +19,14 @@ class MessagesController extends controller{
 	}
 	function POST(){
 		// validar mensagem
-		$message=$this->validMessage($_POST['message']);
+		$message=$this->model->validMessage(
+			$_POST['message']
+		);
 		if($message){
 			// salvar mensagem no banco de dados
-			$messageId=$this->createMessage($message);
+			$messageId=$this->model->createMessage(
+				$message
+			);
 			if($messageId){
 				$this->redirect($_ENV['SITE_URL']);
 			}else{
@@ -44,36 +36,5 @@ class MessagesController extends controller{
 			die('mensagem inválida');
 		}
 	}
-	function readAll($id=false){
-		$where=[
-			'ORDER'=>['id'=>'DESC']
-		];
-		if($id){
-			$where=[
-				'id'=>$id,
-				'LIMIT'=>1
-			];
-		}
-		$arr=$this->db->select('messages','*',$where);
-		if($arr){
-			foreach ($arr as $key => $value) {
-				$arr[$key]['created_at_h']=date(
-					"r",$value['created_at']
-				);
-			}
-		}
-		return $arr;
-	}
-	function readById($id){
-		return $this->readAll($id);
-	}
-	function validMessage($message){
-		$message=trim($message);
-		$len=mb_strlen($message);
-		if($len>=1 AND $len<=128){
-			return $message;
-		}else{
-			return false;
-		}
-	}
+
 }
