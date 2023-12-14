@@ -1,7 +1,8 @@
 <?php
 namespace gaucho;
+use gaucho\model;
 
-class snow{
+class snow extends model{
 	var $sequenceNumberLength;
 	var $unixTimeLength;
 	function __construct($sequenceNumberLength=3){
@@ -71,6 +72,13 @@ class snow{
 
 		// return
 		return $snow;
+	}
+	function getSequenceNumber($messageId,$tableName,$unixTime){
+		$where=[
+			'created_at'=>$unixTime,
+			'id[<=]'=>$messageId
+		];
+		return $this->db()->count($tableName,$where);
 	}
 	function zeros($str,$number){
 		$len=strlen($str);
