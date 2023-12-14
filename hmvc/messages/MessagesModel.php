@@ -14,7 +14,8 @@ class MessagesModel extends model{
 			$snow=new snow();
 			$machineId=1;
 			$sequenceNumber=$this->getSequenceNumber(
-				$messageId
+				$messageId,
+				$unixTime
 			);
 			$where=[
 				'id'=>$messageId
@@ -32,8 +33,9 @@ class MessagesModel extends model{
 			return false;
 		}
 	}
-	function getSequenceNumber($messageId){
+	function getSequenceNumber($messageId,$unixTime){
 		$where=[
+			'created_at'=>$unixTime,
 			'id[<=]'=>$messageId
 		];
 		return $this->db()->count('messages',$where);
