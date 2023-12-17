@@ -26,7 +26,7 @@ class chaplin{
 		}
 		return strtr($str, $arr);
 	}
-	function renderFromFile($filename,$data=[]){
+	function renderFromFile($filename,$data){
 		if(file_exists($filename)){
 			$template=file_get_contents($filename);
 			return $this->renderFromString(
