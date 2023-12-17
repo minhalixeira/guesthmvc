@@ -12,17 +12,17 @@ class chaplin{
 			}
 			if(is_array($value)){
 				foreach ($value as $k2 => $v2) {
+					$keyX=$key.'.'.$k2;
 					if(is_array($v2)){
 						$msg='chaplin ';
 						$msg.='error: <b>';
 						$msg.=htmlentities(
-							$key
+							$keyX
 						);
 						$msg.='</b> must be';
 						$msg.=' a string';
 						die($msg);
 					}
-					$keyX=$key.'.'.$k2;
 					$ev2=htmlentities($v2);	
 					$arr['{{'.$keyX.'}}']=$ev2;
 					$arr['{{&'.$keyX.'}}']=$v2;
