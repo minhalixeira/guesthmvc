@@ -14,14 +14,9 @@ class chaplin{
 				foreach ($value as $k2 => $v2) {
 					$keyX=$key.'.'.$k2;
 					if(is_array($v2)){
-						$msg='chaplin ';
-						$msg.='error: <b>';
-						$msg.=htmlentities(
+						$this->typeError(
 							$keyX
 						);
-						$msg.='</b> must be';
-						$msg.=' a string';
-						die($msg);
 					}
 					$ev2=htmlentities($v2);	
 					$arr['{{'.$keyX.'}}']=$ev2;
@@ -40,5 +35,11 @@ class chaplin{
 		}else{
 			die(htmlentities($filename).' not found');
 		}
+	}
+	function typeError($keyX){
+		$msg='chaplin error: <b>';
+		$msg.=htmlentities($keyX);
+		$msg.='</b> must be a string';
+		die($msg);
 	}
 }
