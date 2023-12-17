@@ -1,8 +1,8 @@
 <?php
 namespace gaucho;
 use gaucho\routes;
-use gaucho\view;
-class controller {
+use gaucho\chaplin;
+class controller extends chaplin{
 	var $routes;
 	var $view;
 	function redirect($url){
@@ -15,12 +15,21 @@ class controller {
 		}
 		return $this->routes->segment($segment);
 	}
-	function view($viewName,$data=[],$print=true,$escape=false){
-		if(!isset($this->view)){
-			$this->view=new view();
+	function view(
+		$viewName,$data=[],$print=true
+	){
+		$data['SITE_URL']=$_ENV['SITE_URL'];
+		$data['SITE_NAME']=$_ENV['SITE_NAME'];
+		$arr=explode('/',$viewName);
+		$hmvc=$arr[0];
+		unset($arr[0]);
+		$viewName=implode('/',$arr);
+		$filename=HMVC.'/'.$hmvc.'/view/'.$viewName.'.html';
+		$out=parent::renderFromFile($filename,$data);
+		if($print){
+			print $out;
+		}else{
+			return $out;
 		}
-		return $this->view->render(
-			$viewName,$data,$print,$escape
-		);
 	}
 }

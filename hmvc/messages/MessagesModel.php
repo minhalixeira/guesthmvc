@@ -56,7 +56,8 @@ class MessagesModel extends model{
 		$where=[
 			'snow'=>$snow
 		];
-		$message=$this->db()->get('messages','*',$where);
+		$cols=['message','created_at'];
+		$message=$this->db()->get('messages',$cols,$where);
 		if($message){
 			$message['created_at_h']=date(
 				"r",$message['created_at']
