@@ -56,7 +56,13 @@ class MessagesModel extends model{
 		$where=[
 			'snow'=>$snow
 		];
-		return $this->readAll($snow);
+		$message=$this->db()->get('messages','*',$where);
+		if($message){
+			$message['created_at_h']=date(
+				"r",$message['created_at']
+			);
+		}
+		return $message;
 	}
 	function update($data,$where){
 		return $this->db()->update('messages',$data,$where);

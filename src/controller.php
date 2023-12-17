@@ -15,10 +15,12 @@ class controller {
 		}
 		return $this->routes->segment($segment);
 	}
-	function view($viewName,$data=[]){
+	function view($viewName,$data=[],$print=true,$escape=false){
 		if(!isset($this->view)){
 			$this->view=new view();
 		}
-		return $this->view->render($viewName,$data);
+		return $this->view->render(
+			$viewName,$data,$print,$escape
+		);
 	}
 }

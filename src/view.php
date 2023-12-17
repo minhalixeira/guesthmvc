@@ -1,12 +1,10 @@
 <?php
 namespace gaucho;
-use gaucho\mustache;
-class view extends mustache{
-	var $print;
-	function __construct($print=true){
-		$this->print=$print;
-	}
-	function render($viewName,$data=[]){
+use gaucho\chaplin;
+class view extends chaplin{
+	function render(
+		$viewName,$data=[],$print=true
+	){
 		$data['SITE_URL']=$_ENV['SITE_URL'];
 		$data['SITE_NAME']=$_ENV['SITE_NAME'];
 		$arr=explode('/',$viewName);
@@ -15,7 +13,7 @@ class view extends mustache{
 		$viewName=implode('/',$arr);
 		$filename=HMVC.'/'.$hmvc.'/view/'.$viewName.'.html';
 		$out=parent::renderFromFile($filename,$data);
-		if($this->print){
+		if($print){
 			print $out;
 		}else{
 			return $out;

@@ -9,10 +9,15 @@ class MessagesController extends controller{
 	}
 	function GET(){
 		$snow=$this->segment(2);
-		$messages=$this->model->readBySnow($snow);
+		$message=$this->model->readBySnow($snow);
+		$messageStr=$this->view(
+			'messages/loop',
+			['message'=>$message],
+			false
+		);
 		$data=[
-			'title'=>$messages[0]['message'],
-			'messages'=>$messages
+			'title'=>$message['message'],
+			'message'=>$messageStr
 		];
 		$this->view('home/head',$data);
 		$this->view('messages/messages',$data);		

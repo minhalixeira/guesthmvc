@@ -10,17 +10,7 @@
 			</form>
 			<b>Mensagens:</b>
 			<hr>
-			{{#messages}}
-			<div class="wrap">{{message}}</div>
-			<p class="text-right">
-				<small>
-					<a href="{{SITE_URL}}/messages/{{snow}}">
-						{{created_at_h}}
-					</a>
-				</small>
-			</p>
-			<hr>
-			{{/messages}}
+			{{&messages}}
 		</div>
 	</div>
 </div>

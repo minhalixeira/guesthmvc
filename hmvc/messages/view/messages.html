@@ -5,16 +5,7 @@
 			<h1 class=" text-center">
 				{{SITE_NAME}}
 			</h1>
-			{{#messages}}
-			<div class="wrap">{{message}}</div>
-			<p class="text-right">
-				<small>
-					<a href="{{SITE_URL}}/messages/{{snow}}">
-						{{created_at_h}}
-					</a>
-				</small>
-			</p>
-			{{/messages}}
+			{{&message}}
 			<p class="text-center">
 				<a href="{{SITE_URL}}">Voltar</a>
 			</p>
