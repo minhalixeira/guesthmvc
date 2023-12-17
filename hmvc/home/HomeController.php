@@ -12,7 +12,7 @@ class HomeController extends controller{
 			'messages'=>$this->loopDaMensagens($messages)
 		];
 		$this->view('home/head',$data);
-		$this->view('home/home',$data);
+		$this->view('home/read',$data);
 	}
 	function loopDaMensagens($messages){
 		$str=null;

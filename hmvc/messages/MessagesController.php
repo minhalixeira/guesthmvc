@@ -20,7 +20,7 @@ class MessagesController extends controller{
 			'message'=>$messageStr
 		];
 		$this->view('home/head',$data);
-		$this->view('messages/messages',$data);		
+		$this->view('messages/read',$data);	
 	}
 	function POST(){
 		// validar mensagem
