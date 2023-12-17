@@ -13,7 +13,7 @@ class chaplin{
 			if(is_array($value)){
 				foreach ($value as $k2 => $v2) {
 					$keyX=$key.'.'.$k2;
-					if(is_array($v2)){
+					if(!is_string($v2)){
 						$this->typeError(
 							$keyX
 						);
