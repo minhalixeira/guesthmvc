@@ -8,7 +8,7 @@ class HomeController extends controller{
 		$MessagesModel=new MessagesModel();
 		$messages=$MessagesModel->readAll();
 		$data=[
-			'title'=>'Guest HMVC',
+			'title'=>$_ENV['SITE_NAME'],
 			'messages'=>$this->loopDaMensagens($messages)
 		];
 		$this->view('home/head',$data);
