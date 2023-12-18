@@ -8,8 +8,8 @@ class MessagesController extends controller{
 		$this->model=new MessagesModel();
 	}
 	function GET(){
-		$snow=$this->segment(2);
-		$message=$this->model->readBySnow($snow);
+		$flake=$this->segment(2);
+		$message=$this->model->readByFlake($flake);
 		$messageStr=$this->view(
 			'messages/loop',
 			['message'=>$message],

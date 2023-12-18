@@ -5,8 +5,8 @@ class chaplin{
 	function renderFromString($str,$data){
 		$arr=[];
 		foreach ($data as $key => $value) {
-			if(is_string($value)){
-				$evalue=htmlentities($value);	
+			if(is_string($value) or is_null($value)){
+				$evalue=@htmlentities($value);	
 				$arr['{{'.$key.'}}']=$evalue;
 				$arr['{{&'.$key.'}}']=$value;	
 			}
@@ -18,7 +18,7 @@ class chaplin{
 							$keyX
 						);
 					}
-					$ev2=htmlentities($v2);	
+					$ev2=@htmlentities($v2);
 					$arr['{{'.$keyX.'}}']=$ev2;
 					$arr['{{&'.$keyX.'}}']=$v2;
 				}

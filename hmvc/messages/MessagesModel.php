@@ -1,7 +1,7 @@
 <?php
 namespace hmvc\messages;
 use gaucho\model;
-use gaucho\snow;
+use gaucho\flake;
 class MessagesModel extends model{
 	function createMessage($message){
 		$unixTime=time();
@@ -11,10 +11,10 @@ class MessagesModel extends model{
 		];
 		if($this->db()->insert('messages',$data)){
 			$messageId=$this->db()->id();
-			$snow=new snow();
+			$flake=new flake();
 			$machineId=1;
 			$tableName='messages';
-			$sequenceNumber=$snow->getSequenceNumber(
+			$sequenceNumber=$flake->getSequenceNumber(
 				$messageId,
 				$tableName,
 				$unixTime
@@ -23,14 +23,14 @@ class MessagesModel extends model{
 				'id'=>$messageId
 			];
 			$data=[
-				'snow'=>$snow->encode(
+				'flake'=>$flake->encode(
 					$unixTime,
 					$machineId,
 					$sequenceNumber
 				)
 			];
 			$this->update($data,$where);
-			return $snow;
+			return $flake;
 		}else{
 			return false;
 		}
@@ -41,7 +41,7 @@ class MessagesModel extends model{
 				'ORDER'=>['id'=>'DESC']
 			];
 		}
-		$cols=['message','created_at','snow'];
+		$cols=['message','created_at','flake'];
 		$arr=$this->db()->select('messages',$cols,$where);
 		if($arr){
 			foreach ($arr as $key => $value) {
@@ -52,9 +52,9 @@ class MessagesModel extends model{
 		}
 		return $arr;
 	}
-	function readBySnow($snow){
+	function readByFlake($flake){
 		$where=[
-			'snow'=>$snow
+			'flake'=>$flake
 		];
 		$cols=['message','created_at'];
 		$message=$this->db()->get('messages',$cols,$where);

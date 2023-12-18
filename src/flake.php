@@ -2,7 +2,7 @@
 namespace gaucho;
 use gaucho\model;
 
-class snow extends model{
+class flake extends model{
 	var $sequenceNumberLength;
 	var $unixTimeLength;
 	function __construct($sequenceNumberLength=3){
@@ -22,17 +22,17 @@ class snow extends model{
 		}
 		return $result;
 	}
-	function decode($snow){
+	function decode($flake){
 		// unixTime
-		$unixTime=substr($snow,0,$this->unixTimeLength);
+		$unixTime=substr($flake,0,$this->unixTimeLength);
 		$unixTime=base_convert($unixTime,36,10);
 
 		// machineId
-		$machineId=substr($snow,$this->unixTimeLength,2);
+		$machineId=substr($flake,$this->unixTimeLength,2);
 		$machineId=base_convert($machineId,36,10);
 
 		// sequenceNumber
-		$sequenceNumber=substr($snow,8,$this->sequenceNumberLength);
+		$sequenceNumber=substr($flake,8,$this->sequenceNumberLength);
 		$sequenceNumber=base_convert($sequenceNumber,36,10);
 
 		return [
@@ -67,11 +67,11 @@ class snow extends model{
 			$this->sequenceNumberLength
 		);
 
-		// snow=unix | machineId | sequenceNumber
-		$snow=$unixTime.$machineId.$sequenceNumber;
+		// flake=unix | machineId | sequenceNumber
+		$flake=$unixTime.$machineId.$sequenceNumber;
 
 		// return
-		return $snow;
+		return $flake;
 	}
 	function getSequenceNumber($messageId,$tableName,$unixTime){
 		$where=[
