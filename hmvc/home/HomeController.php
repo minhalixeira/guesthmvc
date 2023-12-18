@@ -16,7 +16,8 @@ class HomeController extends controller{
 		}
 		$data=[
 			'title'=>$_ENV['SITE_NAME'],
-			'messages'=>$messagesStr
+			'messages'=>$messagesStr,
+			'topo'=>$this->view('home/topo',[],false)
 		];
 		$this->view('home/head',$data);
 		$this->view('home/read',$data);

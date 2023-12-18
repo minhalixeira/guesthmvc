@@ -17,7 +17,8 @@ class MessagesController extends controller{
 		);
 		$data=[
 			'title'=>$message['message'],
-			'message'=>$messageStr
+			'message'=>$messageStr,
+			'topo'=>$this->view('home/topo',[],false)
 		];
 		$this->view('home/head',$data);
 		$this->view('messages/read',$data);	
