@@ -7,6 +7,6 @@ install:
 	composer install
 	composer dump-autoload
 	$(PHP) bin/mig.php
-	$(LESS) less/style.less public/css/style.css --clean-css
-	$(UGLIFY) js/inc/jquery.js js/script.js --output public/js/script.js --compress
+	$(LESS) less/style.less public/css/min.css --clean-css
+	$(UGLIFY) js/inc/jquery.js js/script.js --output public/js/min.js --compress
 	echo "pronto!"
