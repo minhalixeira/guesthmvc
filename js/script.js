@@ -5,6 +5,7 @@ v0.1.2  sem copiar o value
 */
 $(document).ready(function() {
   const textarea=$("textarea");
+  textarea.focus();
   textarea.on("keydown",function(event) {
     if(event.keyCode===13){
       if(!event.shiftKey){
