@@ -20,6 +20,7 @@ class controller extends chaplin{
 	){
 		$data['SITE_URL']=$_ENV['SITE_URL'];
 		$data['SITE_NAME']=$_ENV['SITE_NAME'];
+		$data['VERSION']=$_ENV['VERSION'];
 		$arr=explode('/',$viewName);
 		$hmvc=$arr[0];
 		unset($arr[0]);
