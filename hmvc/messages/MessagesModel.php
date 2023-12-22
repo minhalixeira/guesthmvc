@@ -56,6 +56,10 @@ class MessagesModel extends model{
 		$where=[
 			'flake'=>$flake
 		];
+		return $this->readAll($where);
+		$where=[
+			'flake'=>$flake
+		];
 		$cols=['message','created_at'];
 		$message=$this->db()->get('messages',$cols,$where);
 		if($message){

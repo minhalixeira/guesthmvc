@@ -1,8 +1,10 @@
-<div class="wrap">{{message.message}}</div>
+{{#messages}}
+<div class="wrap">{{message}}</div>
 <p class="text-right">
 	<small>
-		<a href="{{SITE_URL}}/messages/{{message.flake}}">
-			{{message.created_at_h}}
+		<a href="{{SITE_URL}}/messages/{{flake}}">
+			{{created_at_h}}
 		</a>
 	</small>
 </p>
+{{/messages}}

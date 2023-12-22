@@ -12,11 +12,11 @@ class MessagesController extends controller{
 		$message=$this->model->readByFlake($flake);
 		$messageStr=$this->view(
 			'messages/loop',
-			['message'=>$message],
+			['messages'=>$message],
 			false
 		);
 		$data=[
-			'title'=>$message['message'],
+			'title'=>$message[0]['message'],
 			'message'=>$messageStr,
 			'topo'=>$this->view('home/topo',[],false)
 		];
